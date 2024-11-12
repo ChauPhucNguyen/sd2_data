@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <title>Robot Dashboard</title>
-
-    </head>
-    <body>
-        <h1>Robot Dashboard</h1>
+{% extends "layout.html" %}
+{% block content %}
+<h1>Robot Dashboard</h1>
         <p>Robot Speed: <span id = "speed" >Loading...</span></p>
         <p>Robot Steering Angle: <span id = "steeringAngle">Loading... </span> Degrees</p>
         <p>Robot Battery Level: <span id = "batteryLevel">Loading...</span>%</p>
+        <p>Robot Batter Consumption: <span id = "batteryConsumption">Loading...</span>%</p>
         <script>
             async function fetchData(){
                 const response = await fetch('/data');
@@ -17,9 +12,9 @@
                 document.getElementById("speed").textContent = data.speed.toFixed(2);
                 document.getElementById("steeringAngle").textContent = data.steeringAngle.toFixed(2);
                 document.getElementById("batteryLevel").textContent = data.batteryLevel.toFixed(2);
+                document.getElementById("batteryConsumption").textContent = data.batteryConsumption.toFixed(2);
             }
             setInterval(fetchData, 2000);
 
         </script>
-    </body>
-</html>
+        {% endblock %}
